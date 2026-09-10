@@ -13,7 +13,7 @@
       --bg:#fdfdfc;
       --text:#1d1d1b;
       --muted:#999996;
-      --line:#f0f0ee;
+      --line:#f2f2f2;
       --link-bg:#e9e9e6;
       --link-hover:#deded9;
       --focus-shadow:0 0 0 18px var(--bg);
@@ -42,7 +42,7 @@
     .site-shell{
       width:min(calc(100% - 36px), var(--max));
       margin:0 auto;
-      padding:46px 0 64px;
+      padding:85px 0 64px;
     }
 
     h1,h2,p{margin-top:0}
@@ -73,9 +73,9 @@
       color:#2b2b28;
       background:none;
       text-decoration:underline;
-      text-decoration-thickness:1px;
+      text-decoration-thickness:.75px;
       text-underline-offset:3px;
-      text-decoration-color:rgba(29,29,27,.38);
+      text-decoration-color:rgba(29,29,27,.18);
       padding:0;
       transition:color .15s ease, text-decoration-color .15s ease, opacity .15s ease;
     }
@@ -83,7 +83,7 @@
     a:hover,
     a:focus-visible{
       color:#000;
-      text-decoration-color:rgba(29,29,27,.82);
+      text-decoration-color:rgba(29,29,27,.42);
       outline:none;
     }
 
@@ -117,6 +117,16 @@
       padding:9px 0;
       border-bottom:0;
       transition:opacity .18s ease, filter .18s ease;
+    }
+
+    @media (hover:hover){
+      body:not(.project-open) .build-list:has(.project-row:hover) .project-row:not(:hover){
+        opacity:.28;
+      }
+
+      body:not(.project-open) .build-list:has(.project-row:hover) .project-row:hover{
+        opacity:1;
+      }
     }
 
     .project-row::after{
@@ -230,6 +240,49 @@
       transform:translate(-50%,-50%) rotate(90deg) scaleX(.4);
     }
 
+    /* Expanded Build Log icon states.
+       Live/date rows become a green check.
+       Loading rows become a red minus.
+       Both use the exact same 18px footprint as the original + button. */
+    .project-row.active:not(:has(.loading)) .toggle{
+      background:#1ed760;
+      border-color:#1ed760;
+      color:#07150b;
+    }
+
+    .project-row.active:not(:has(.loading)) .toggle::before{
+      width:7px;
+      height:4px;
+      background:transparent;
+      border-left:1.5px solid currentColor;
+      border-bottom:1.5px solid currentColor;
+      border-radius:0;
+      transform:translate(-50%,-62%) rotate(-45deg);
+    }
+
+    .project-row.active:not(:has(.loading)) .toggle::after{
+      opacity:0;
+    }
+
+    .project-row.active:has(.loading) .toggle{
+      background:#ff453a;
+      border-color:#ff453a;
+      color:#ffffff;
+    }
+
+    .project-row.active:has(.loading) .toggle::before{
+      width:6px;
+      height:1px;
+      background:currentColor;
+      border:0;
+      border-radius:1px;
+      transform:translate(-50%,-50%);
+    }
+
+    .project-row.active:has(.loading) .toggle::after{
+      opacity:0;
+    }
+
     .toggle:hover{
       border-color:#33332f;
     }
@@ -277,7 +330,6 @@
       align-items:center;
       gap:6px;
     }
-
 
     .new-badge{
       display:inline-flex;
@@ -405,13 +457,13 @@
     body.project-open a{
       background:none;
       color:inherit;
-      text-decoration-color:rgba(116,116,110,.28);
+      text-decoration-color:rgba(116,116,110,.16);
     }
 
     body.project-open a:hover,
     body.project-open a:focus-visible{
       color:#71716b;
-      text-decoration-color:rgba(113,113,107,.72);
+      text-decoration-color:rgba(113,113,107,.38);
     }
 
 
@@ -421,13 +473,13 @@
 
     body.project-open a:has(strong){
       color:#ffffff;
-      text-decoration-color:rgba(255,255,255,.24);
+      text-decoration-color:rgba(255,255,255,.14);
     }
 
     body.project-open a:has(strong):hover,
     body.project-open a:has(strong):focus-visible{
       color:#ffffff;
-      text-decoration-color:rgba(255,255,255,.48);
+      text-decoration-color:rgba(255,255,255,.30);
     }
 
     body.project-open .build-heading{
@@ -897,10 +949,6 @@
 
     <section class="bio" aria-label="About">
       <p>I’ve spent the last <strong>3.5+ years</strong> at <strong>BBC News</strong> working across the systems that determine how media reaches people: broadcasters, telecoms, publishers, platforms and partnerships. I’ve helped shape <strong>distribution, partner operations and audience growth across African markets</strong>, whether the audience gets there through an antenna or an app icon. Attention does not care whether we call it <strong>linear or digital</strong>.</p>
-
-      <p>I joined in 2023 in <strong>Business Development</strong> and now work in <strong>World Service Partnerships</strong>. Apparently, if you spend enough time helping partnerships actually work, somebody eventually puts <strong>Partnerships</strong> in your job title.</p>
-
-      <p>Before the BBC, I worked as a <strong>management trainee</strong> across operations and business support at <a href="https://group.dhl.com/en.html" target="_blank" rel="noreferrer"><strong>DHL</strong></a>, contributed to product and data visualisation at <a href="https://prifina.com/" target="_blank" rel="noreferrer"><strong>Prifina</strong></a>, and worked on entrepreneurship through <a href="https://www.instagram.com/adrelated/" target="_blank" rel="noreferrer"><strong>ADRELATED</strong></a>, a three person circular fashion and cultural commerce project where I ran publishing, inventory, sales, logistics and finance. I’m also a <strong>Director at Pathway Model School</strong> in Akure, Ondo State, Nigeria, where I’ve been involved in my family’s education business for several years.</p>
 
       <p>You can find the longer version of my work in my <a href="https://drive.google.com/file/d/1fRKoGN8x8eKFFCnOwRhKzHSt3IcczSZU/view" target="_blank" rel="noreferrer"><strong>Professional Record</strong></a>, or <a href="https://cal.com/dont4getmybread" target="_blank" rel="noreferrer"><strong>book some time with me</strong></a> if you’d rather talk.</p>
 
