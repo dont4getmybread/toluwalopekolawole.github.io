@@ -837,6 +837,18 @@
       display:block;
       width:100%;
       margin:0 0 50px;
+      padding:7px;
+      border:1px solid rgba(29,29,27,.07);
+      border-radius:18px;
+      background:#f7f7f4;
+      box-shadow:0 10px 30px rgba(29,29,27,.06);
+      transition:background .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    body.project-open .music-control{
+      background:#171715;
+      border-color:rgba(255,255,255,.06);
+      box-shadow:0 10px 30px rgba(0,0,0,.16);
     }
 
     .reading-control{
@@ -1021,12 +1033,13 @@
 
     .spotify-embed{
       width:100%;
-      height:152px;
+      height:232px;
       border:0;
-      border-radius:10px;
+      border-radius:13px;
       display:block;
       overflow:hidden;
-      box-shadow:0 8px 28px rgba(0,0,0,.08);
+      background:#1d1d1b;
+      box-shadow:none;
     }
 
     body.project-open .music-toggle{
@@ -1094,6 +1107,16 @@
 
       .music-panel{
         width:100%;
+      }
+
+      .music-control{
+        padding:5px;
+        border-radius:15px;
+      }
+
+      .spotify-embed{
+        height:200px;
+        border-radius:11px;
       }
 
       .project-row{
@@ -1223,8 +1246,9 @@
     <div class="music-panel" id="music-panel">
     <iframe
     class="spotify-embed"
+    id="spotify-embed"
     title="Spotify playlist soundtrack"
-    src="https://open.spotify.com/embed/playlist/1tEP8boAv19ptfXJHizdKW?utm_source=generator"
+    src="https://open.spotify.com/embed/playlist/1tEP8boAv19ptfXJHizdKW?utm_source=generator&theme=0"
     width="100%"
     height="152"
     frameborder="0"
@@ -1425,6 +1449,13 @@
     const visitorMinuteHand = document.getElementById('visitor-minute-hand');
     const visitorSecondHand = document.getElementById('visitor-second-hand');
 
+    const spotifyEmbed = document.getElementById('spotify-embed');
+    const spotifyPlaylists = {
+      morning:'4NoCMfOTMpkQciy7PhciVG',
+      afternoonEvening:'1tEP8boAv19ptfXJHizdKW'
+    };
+    let activeSpotifyPlaylist = null;
+
     const visitorTargets = {
       'new york': { label:'New York, NY', timeZone:'America/New_York' },
       'new york city': { label:'New York, NY', timeZone:'America/New_York' },
@@ -1514,6 +1545,26 @@
       return mins ? `${sign}${hours}h ${mins}m` : `${sign}${hours}hrs`;
     }
 
+    function updateSpotifyForVisitor(date = new Date()) {
+      const zone = visitorClockLocation.timeZone;
+      const parts = zonedParts(zone, date);
+      const minutesAfterMidnight = (parts.hour * 60) + parts.minute;
+
+      // 00:00 through 12:00 uses the morning playlist.
+      // 12:01 through 23:59 uses the existing afternoon/evening playlist.
+      const playlistId = minutesAfterMidnight <= 720
+        ? spotifyPlaylists.morning
+        : spotifyPlaylists.afternoonEvening;
+
+      if (activeSpotifyPlaylist === playlistId) return;
+
+      activeSpotifyPlaylist = playlistId;
+      spotifyEmbed.src = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=0`;
+      spotifyEmbed.title = minutesAfterMidnight <= 720
+        ? 'Morning Spotify playlist'
+        : 'Afternoon and evening Spotify playlist';
+    }
+
     function updateVisitorClock() {
       const now = new Date();
       const zone = visitorClockLocation.timeZone;
@@ -1539,6 +1590,7 @@
       visitorHourHand.style.transform = `rotate(${hourAngle}deg)`;
       visitorMinuteHand.style.transform = `rotate(${minuteAngle}deg)`;
       visitorSecondHand.style.transform = `rotate(${secondAngle}deg)`;
+      updateSpotifyForVisitor(now);
     }
 
     async function resolveVisitorClockLocation() {
