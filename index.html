@@ -129,6 +129,89 @@
       overflow:visible;
     }
 
+    .intro-tools{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
+    .visitor-clock{
+      width:260px;
+      min-height:102px;
+      border-radius:18px;
+      background:#1d1d1b;
+      color:#ffffff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 12px 12px 16px;
+      overflow:hidden;
+    }
+
+    .visitor-clock-copy{
+      min-width:0;
+      flex:1 1 auto;
+    }
+
+    .visitor-time{
+      font-size:22px;
+      line-height:1.05;
+      font-weight:600;
+      letter-spacing:-.02em;
+      white-space:nowrap;
+    }
+
+    .visitor-place,
+    .visitor-offset{
+      color:#aaa9a6;
+      font-size:11px;
+      line-height:1.35;
+      white-space:nowrap;
+    }
+
+    .visitor-place{
+      margin-top:8px;
+    }
+
+    .visitor-analog{
+      width:78px;
+      height:78px;
+      flex:0 0 78px;
+      overflow:visible;
+    }
+
+    .clock-number{
+      fill:#ffffff;
+      font-size:9px;
+      font-weight:600;
+      text-anchor:middle;
+      dominant-baseline:middle;
+      font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .clock-hand{
+      stroke:#ffffff;
+      stroke-linecap:round;
+      transform-origin:50px 50px;
+    }
+
+    .clock-hand.hour{ stroke-width:4.2; }
+    .clock-hand.minute{ stroke-width:3.2; }
+    .clock-hand.second{
+      stroke:var(--twitter);
+      stroke-width:1.8;
+    }
+
+    .clock-pin{
+      fill:#ffffff;
+    }
+
+    body.project-open .visitor-clock{
+      background:#151513;
+    }
+
     @keyframes intro-globe-roll{
       to{ transform:rotate(360deg); }
     }
@@ -962,6 +1045,41 @@
         padding-bottom:120px;
       }
 
+      .intro-topline{
+        align-items:flex-start;
+      }
+
+      .intro-tools{
+        gap:7px;
+      }
+
+      .visitor-clock{
+        width:205px;
+        min-height:86px;
+        border-radius:16px;
+        padding:10px 9px 10px 12px;
+        gap:6px;
+      }
+
+      .visitor-time{
+        font-size:18px;
+      }
+
+      .visitor-place,
+      .visitor-offset{
+        font-size:9.5px;
+      }
+
+      .visitor-place{
+        margin-top:6px;
+      }
+
+      .visitor-analog{
+        width:66px;
+        height:66px;
+        flex-basis:66px;
+      }
+
       .reading-control{
         left:12px;
         bottom:12px;
@@ -1049,16 +1167,43 @@
     <section class="intro">
       <div class="intro-topline">
         <h1>Tolú</h1>
-        <span class="intro-globe" aria-hidden="true">
-          <svg class="intro-globe-svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-            <circle class="globe-ocean" cx="12" cy="12" r="10.35"/>
-            <path class="globe-land" d="M4.7 6.7 6.1 4.9l2.3-.9 1.8 1.4-.5 1.7 1.2 1.2-.5 1.8-2.1.5-.9 1.7-1.8-.4-.8-1.7.4-1.5-.9-.8.4-1.2Z"/>
-            <path class="globe-land" d="m10.5 11 2.4-1.2 2.3.6 1.4 2-1 1.2.4 2.3-1.8 2.8-1.8-.7-.4-2.3-1.5-1.1V11Z"/>
-            <path class="globe-land" d="m16.5 5.1 2 .8 1 1.5-.8 1.4-1.7-.2-1.1-1.5.6-2Z"/>
-            <path class="globe-grid" d="M2.7 12h18.6M12 2.7c2.05 2.55 3.1 5.65 3.1 9.3S14.05 18.75 12 21.3M12 2.7C9.95 5.25 8.9 8.35 8.9 12s1.05 6.75 3.1 9.3" fill="none" stroke-width=".62" stroke-linecap="round"/>
-            <circle class="globe-outline" cx="12" cy="12" r="10.35" stroke-width=".9"/>
-          </svg>
-        </span>
+        <div class="intro-tools">
+          <span class="intro-globe" aria-hidden="true">
+            <svg class="intro-globe-svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+              <circle class="globe-ocean" cx="12" cy="12" r="10.35"/>
+              <path class="globe-land" d="M4.7 6.7 6.1 4.9l2.3-.9 1.8 1.4-.5 1.7 1.2 1.2-.5 1.8-2.1.5-.9 1.7-1.8-.4-.8-1.7.4-1.5-.9-.8.4-1.2Z"/>
+              <path class="globe-land" d="m10.5 11 2.4-1.2 2.3.6 1.4 2-1 1.2.4 2.3-1.8 2.8-1.8-.7-.4-2.3-1.5-1.1V11Z"/>
+              <path class="globe-land" d="m16.5 5.1 2 .8 1 1.5-.8 1.4-1.7-.2-1.1-1.5.6-2Z"/>
+              <path class="globe-grid" d="M2.7 12h18.6M12 2.7c2.05 2.55 3.1 5.65 3.1 9.3S14.05 18.75 12 21.3M12 2.7C9.95 5.25 8.9 8.35 8.9 12s1.05 6.75 3.1 9.3" fill="none" stroke-width=".62" stroke-linecap="round"/>
+              <circle class="globe-outline" cx="12" cy="12" r="10.35" stroke-width=".9"/>
+            </svg>
+          </span>
+          <div class="visitor-clock" id="visitor-clock" aria-label="Visitor local time">
+            <div class="visitor-clock-copy">
+              <div class="visitor-time" id="visitor-time">--:-- --</div>
+              <div class="visitor-place" id="visitor-place">Local time</div>
+              <div class="visitor-offset" id="visitor-offset">Compared with Lagos</div>
+            </div>
+            <svg class="visitor-analog" viewBox="0 0 100 100" aria-hidden="true">
+              <text class="clock-number" x="50" y="8">12</text>
+              <text class="clock-number" x="70.5" y="13.5">1</text>
+              <text class="clock-number" x="86.5" y="29.5">2</text>
+              <text class="clock-number" x="92" y="50">3</text>
+              <text class="clock-number" x="86.5" y="70.5">4</text>
+              <text class="clock-number" x="70.5" y="86.5">5</text>
+              <text class="clock-number" x="50" y="92">6</text>
+              <text class="clock-number" x="29.5" y="86.5">7</text>
+              <text class="clock-number" x="13.5" y="70.5">8</text>
+              <text class="clock-number" x="8" y="50">9</text>
+              <text class="clock-number" x="13.5" y="29.5">10</text>
+              <text class="clock-number" x="29.5" y="13.5">11</text>
+              <line class="clock-hand hour" id="visitor-hour-hand" x1="50" y1="50" x2="50" y2="28"/>
+              <line class="clock-hand minute" id="visitor-minute-hand" x1="50" y1="50" x2="50" y2="18"/>
+              <line class="clock-hand second" id="visitor-second-hand" x1="50" y1="54" x2="50" y2="14"/>
+              <circle class="clock-pin" cx="50" cy="50" r="3.2"/>
+            </svg>
+          </div>
+        </div>
       </div>
       <p class="updated">Updated September 3, 2026</p>
 
@@ -1264,6 +1409,157 @@
   </main>
 
   <script>
+
+    const visitorTime = document.getElementById('visitor-time');
+    const visitorPlace = document.getElementById('visitor-place');
+    const visitorOffset = document.getElementById('visitor-offset');
+    const visitorHourHand = document.getElementById('visitor-hour-hand');
+    const visitorMinuteHand = document.getElementById('visitor-minute-hand');
+    const visitorSecondHand = document.getElementById('visitor-second-hand');
+
+    const visitorTargets = {
+      'new york': { label:'New York, NY', timeZone:'America/New_York' },
+      'new york city': { label:'New York, NY', timeZone:'America/New_York' },
+      'beijing': { label:'Beijing, CN', timeZone:'Asia/Shanghai' },
+      'london': { label:'London, UK', timeZone:'Europe/London' },
+      'lagos': { label:'Lagos, NG', timeZone:'Africa/Lagos' },
+      'abuja': { label:'Abuja, NG', timeZone:'Africa/Lagos' }
+    };
+
+    const visitorZoneFallbacks = {
+      'America/New_York': { label:'New York, NY', timeZone:'America/New_York' },
+      'Asia/Shanghai': { label:'Beijing, CN', timeZone:'Asia/Shanghai' },
+      'Europe/London': { label:'London, UK', timeZone:'Europe/London' },
+      'Africa/Lagos': { label:'Lagos / Abuja, NG', timeZone:'Africa/Lagos' }
+    };
+
+    let visitorClockLocation = (() => {
+      const browserZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Africa/Lagos';
+      return visitorZoneFallbacks[browserZone] || {
+        label: browserZone.split('/').pop().replace(/_/g, ' '),
+        timeZone: browserZone
+      };
+    })();
+
+    function shortZoneName(timeZone, date) {
+      if (timeZone === 'Africa/Lagos') return 'WAT';
+      if (timeZone === 'Asia/Shanghai') return 'CST';
+
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone,
+        timeZoneName:'short'
+      }).formatToParts(date);
+
+      return parts.find(part => part.type === 'timeZoneName')?.value || '';
+    }
+
+    function zonedParts(timeZone, date) {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone,
+        hour:'numeric',
+        minute:'2-digit',
+        second:'2-digit',
+        hour12:false,
+        year:'numeric',
+        month:'2-digit',
+        day:'2-digit'
+      }).formatToParts(date);
+
+      const values = {};
+      parts.forEach(part => {
+        if (part.type !== 'literal') values[part.type] = part.value;
+      });
+
+      return {
+        hour:Number(values.hour),
+        minute:Number(values.minute),
+        second:Number(values.second),
+        year:Number(values.year),
+        month:Number(values.month),
+        day:Number(values.day)
+      };
+    }
+
+    function zoneOffsetMinutes(timeZone, date) {
+      const p = zonedParts(timeZone, date);
+      const utcFromZone = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second);
+      return Math.round((utcFromZone - date.getTime()) / 60000);
+    }
+
+    function relativeDayLabel(date, visitorZone) {
+      const visitor = zonedParts(visitorZone, date);
+      const lagos = zonedParts('Africa/Lagos', date);
+      const visitorDate = Date.UTC(visitor.year, visitor.month - 1, visitor.day);
+      const lagosDate = Date.UTC(lagos.year, lagos.month - 1, lagos.day);
+
+      if (visitorDate < lagosDate) return 'Yesterday';
+      if (visitorDate > lagosDate) return 'Tomorrow';
+      return 'Today';
+    }
+
+    function formatOffsetHours(minutes) {
+      if (minutes === 0) return 'same time';
+      const sign = minutes > 0 ? '+' : '-';
+      const absolute = Math.abs(minutes);
+      const hours = Math.floor(absolute / 60);
+      const mins = absolute % 60;
+      return mins ? `${sign}${hours}h ${mins}m` : `${sign}${hours}hrs`;
+    }
+
+    function updateVisitorClock() {
+      const now = new Date();
+      const zone = visitorClockLocation.timeZone;
+      const parts = zonedParts(zone, now);
+
+      visitorTime.textContent = new Intl.DateTimeFormat('en-US', {
+        timeZone:zone,
+        hour:'numeric',
+        minute:'2-digit',
+        hour12:true
+      }).format(now);
+
+      const zoneName = shortZoneName(zone, now);
+      visitorPlace.textContent = `${visitorClockLocation.label}${zoneName ? ` (${zoneName})` : ''}`;
+
+      const difference = zoneOffsetMinutes(zone, now) - zoneOffsetMinutes('Africa/Lagos', now);
+      visitorOffset.textContent = `${relativeDayLabel(now, zone)}, ${formatOffsetHours(difference)}`;
+
+      const hourAngle = ((parts.hour % 12) + parts.minute / 60 + parts.second / 3600) * 30;
+      const minuteAngle = (parts.minute + parts.second / 60) * 6;
+      const secondAngle = parts.second * 6;
+
+      visitorHourHand.style.transform = `rotate(${hourAngle}deg)`;
+      visitorMinuteHand.style.transform = `rotate(${minuteAngle}deg)`;
+      visitorSecondHand.style.transform = `rotate(${secondAngle}deg)`;
+    }
+
+    async function resolveVisitorClockLocation() {
+      try {
+        const response = await fetch('https://ipapi.co/json/', { cache:'no-store' });
+        if (!response.ok) throw new Error('location unavailable');
+
+        const data = await response.json();
+        const cityKey = String(data.city || '').trim().toLowerCase();
+        const matched = visitorTargets[cityKey];
+
+        if (matched) {
+          visitorClockLocation = matched;
+        } else if (data.timezone) {
+          visitorClockLocation = visitorZoneFallbacks[data.timezone] || {
+            label: data.city ? `${data.city}, ${data.country_code || ''}`.replace(/, $/, '') : data.timezone.split('/').pop().replace(/_/g, ' '),
+            timeZone:data.timezone
+          };
+        }
+      } catch (error) {
+        // Browser time zone fallback already set.
+      }
+
+      updateVisitorClock();
+    }
+
+    updateVisitorClock();
+    resolveVisitorClockLocation();
+    setInterval(updateVisitorClock, 1000);
 
     const readingControl = document.getElementById('reading-control');
     let readingScrollTimer = null;
