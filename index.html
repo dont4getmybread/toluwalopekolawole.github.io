@@ -747,6 +747,79 @@
       margin:0 0 50px;
     }
 
+    .reading-control{
+      position:fixed;
+      left:22px;
+      bottom:20px;
+      z-index:24;
+    }
+
+    .reading-link{
+      min-width:118px;
+      height:42px;
+      border:1px solid rgba(29,29,27,.13);
+      border-radius:999px;
+      background:#1d1d1b;
+      color:#ffffff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 15px;
+      font-size:12px;
+      line-height:1;
+      font-weight:500;
+      letter-spacing:.01em;
+      text-decoration:none;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      box-shadow:0 8px 26px rgba(29,29,27,.12);
+      animation:music-breathe 2.3s ease-in-out infinite;
+      transform-origin:center;
+      transition:background .16s ease, color .16s ease, transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+    }
+
+    .reading-link:hover,
+    .reading-link:focus-visible{
+      background:#000000;
+      color:#ffffff;
+      transform:translateY(-1px);
+      box-shadow:0 12px 32px rgba(29,29,27,.18);
+      outline:none;
+    }
+
+    .reading-control.is-scrolling .reading-link{
+      background:rgba(253,253,252,.12);
+      color:rgba(29,29,27,.28);
+      border-color:rgba(29,29,27,.05);
+      box-shadow:none;
+      backdrop-filter:blur(2px);
+      -webkit-backdrop-filter:blur(2px);
+      animation:none;
+      opacity:.42;
+      pointer-events:none;
+    }
+
+    body.project-open .reading-link{
+      background:#ffffff;
+      color:#1d1d1b;
+      border-color:rgba(255,255,255,.16);
+      box-shadow:0 8px 26px rgba(0,0,0,.20);
+    }
+
+    body.project-open .reading-link:hover,
+    body.project-open .reading-link:focus-visible{
+      background:#f2f2ef;
+      color:#000000;
+    }
+
+    body.project-open .reading-control.is-scrolling .reading-link{
+      background:rgba(32,32,30,.10);
+      color:rgba(255,255,255,.24);
+      border-color:rgba(255,255,255,.04);
+      box-shadow:none;
+      opacity:.38;
+    }
+
     .music-toggle{
       min-width:118px;
       height:42px;
@@ -889,6 +962,11 @@
         padding-bottom:120px;
       }
 
+      .reading-control{
+        left:12px;
+        bottom:12px;
+      }
+
       .music-panel{
         width:100%;
       }
@@ -963,6 +1041,9 @@
 
 <body>
 
+  <div class="reading-control" id="reading-control">
+    <a class="reading-link" href="https://beneficial-weeder-e0f.notion.site/What-I-m-Reading-034e3c68bd0e4de4a06b673c702c0c3f" target="_blank" rel="noreferrer">What I'm reading</a>
+  </div>
   <button class="scrim" type="button" aria-label="Close project details"></button>
   <main class="site-shell">
     <section class="intro">
@@ -997,10 +1078,6 @@
 
     <!-- Spotify playlist soundtrack. Playback is user-initiated inside Spotify's embed. -->
     <div class="music-control" id="music-control">
-    <button class="music-toggle" id="music-toggle" type="button" aria-expanded="false" aria-controls="music-panel" aria-label="Open soundtrack">
-    <span class="music-note" aria-hidden="true">♪</span>
-    <span class="music-label" id="music-label">Soundtrack</span>
-    </button>
     <div class="music-panel" id="music-panel">
     <iframe
     class="spotify-embed"
@@ -1188,27 +1265,15 @@
 
   <script>
 
-    const musicControl = document.getElementById('music-control');
-    const musicToggle = document.getElementById('music-toggle');
-    const musicLabel = document.getElementById('music-label');
-
-    musicToggle.addEventListener('click', () => {
-      const open = musicControl.classList.toggle('open');
-      musicToggle.setAttribute('aria-expanded', String(open));
-      musicToggle.setAttribute('aria-label', open ? 'Close soundtrack' : 'Open soundtrack');
-      musicLabel.textContent = open ? 'Close' : 'Soundtrack';
-    });
-
-    let soundtrackScrollTimer = null;
+    const readingControl = document.getElementById('reading-control');
+    let readingScrollTimer = null;
 
     window.addEventListener('scroll', () => {
-      if (!musicControl.classList.contains('open')) {
-        musicControl.classList.add('is-scrolling');
-      }
+      readingControl.classList.add('is-scrolling');
 
-      clearTimeout(soundtrackScrollTimer);
-      soundtrackScrollTimer = window.setTimeout(() => {
-        musicControl.classList.remove('is-scrolling');
+      clearTimeout(readingScrollTimer);
+      readingScrollTimer = window.setTimeout(() => {
+        readingControl.classList.remove('is-scrolling');
       }, 320);
     }, { passive:true });
 
