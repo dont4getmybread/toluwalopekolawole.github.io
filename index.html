@@ -1451,8 +1451,14 @@
 
     const spotifyEmbed = document.getElementById('spotify-embed');
     const spotifyPlaylists = {
-      morning:'4NoCMfOTMpkQciy7PhciVG',
-      afternoonEvening:'1tEP8boAv19ptfXJHizdKW'
+      morning:{
+        id:'4NoCMfOTMpkQciy7PhciVG',
+        si:'04234f2319574c9e'
+      },
+      afternoonEvening:{
+        id:'1tEP8boAv19ptfXJHizdKW',
+        si:''
+      }
     };
     let activeSpotifyPlaylist = null;
 
@@ -1552,14 +1558,15 @@
 
       // 00:00 through 12:00 uses the morning playlist.
       // 12:01 through 23:59 uses the existing afternoon/evening playlist.
-      const playlistId = minutesAfterMidnight <= 720
+      const playlist = minutesAfterMidnight <= 720
         ? spotifyPlaylists.morning
         : spotifyPlaylists.afternoonEvening;
 
-      if (activeSpotifyPlaylist === playlistId) return;
+      if (activeSpotifyPlaylist === playlist.id) return;
 
-      activeSpotifyPlaylist = playlistId;
-      spotifyEmbed.src = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=0`;
+      activeSpotifyPlaylist = playlist.id;
+      const shareParam = playlist.si ? `&si=${playlist.si}` : '';
+      spotifyEmbed.src = `https://open.spotify.com/embed/playlist/${playlist.id}?utm_source=generator&theme=0${shareParam}`;
       spotifyEmbed.title = minutesAfterMidnight <= 720
         ? 'Morning Spotify playlist'
         : 'Afternoon and evening Spotify playlist';
