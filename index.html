@@ -112,7 +112,7 @@
     .intro-globe{
       width:19px;
       height:19px;
-      display:inline-flex;
+      display:none;
       align-items:center;
       justify-content:center;
       flex:0 0 19px;
@@ -741,13 +741,10 @@
 
 
     .music-control{
-      position:fixed;
-      left:22px;
-      bottom:20px;
-      z-index:24;
-      display:flex;
-      align-items:flex-end;
-      gap:8px;
+      position:static;
+      display:block;
+      width:100%;
+      margin:0 0 50px;
     }
 
     .music-toggle{
@@ -841,13 +838,13 @@
     }
 
     .music-panel{
-      width:min(268px, calc(100vw - 58px));
-      max-height:0;
-      opacity:0;
-      overflow:hidden;
-      pointer-events:none;
-      transform:translateY(6px);
-      transition:max-height .25s ease, opacity .18s ease, transform .18s ease;
+      width:100%;
+      max-height:none;
+      opacity:1;
+      overflow:visible;
+      pointer-events:auto;
+      transform:none;
+      transition:none;
     }
 
     .music-control.open .music-panel{
@@ -892,13 +889,8 @@
         padding-bottom:120px;
       }
 
-      .music-control{
-        left:12px;
-        bottom:12px;
-      }
-
       .music-panel{
-        width:min(252px, calc(100vw - 52px));
+        width:100%;
       }
 
       .project-row{
@@ -971,26 +963,6 @@
 
 <body>
 
-  <!-- Spotify playlist soundtrack. Playback is user-initiated inside Spotify's embed. -->
-  <div class="music-control" id="music-control">
-    <button class="music-toggle" id="music-toggle" type="button" aria-expanded="false" aria-controls="music-panel" aria-label="Open soundtrack">
-      <span class="music-note" aria-hidden="true">♪</span>
-      <span class="music-label" id="music-label">Soundtrack</span>
-    </button>
-    <div class="music-panel" id="music-panel">
-      <iframe
-        class="spotify-embed"
-        title="Spotify playlist soundtrack"
-        src="https://open.spotify.com/embed/playlist/1tEP8boAv19ptfXJHizdKW?utm_source=generator"
-        width="100%"
-        height="152"
-        frameborder="0"
-        allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy">
-      </iframe>
-    </div>
-  </div>
   <button class="scrim" type="button" aria-label="Close project details"></button>
   <main class="site-shell">
     <section class="intro">
@@ -1022,6 +994,27 @@
 
       <p>Or just <a href="mailto:Tolu7711@gmail.com">email me</a>.</p>
     </section>
+
+    <!-- Spotify playlist soundtrack. Playback is user-initiated inside Spotify's embed. -->
+    <div class="music-control" id="music-control">
+    <button class="music-toggle" id="music-toggle" type="button" aria-expanded="false" aria-controls="music-panel" aria-label="Open soundtrack">
+    <span class="music-note" aria-hidden="true">♪</span>
+    <span class="music-label" id="music-label">Soundtrack</span>
+    </button>
+    <div class="music-panel" id="music-panel">
+    <iframe
+    class="spotify-embed"
+    title="Spotify playlist soundtrack"
+    src="https://open.spotify.com/embed/playlist/1tEP8boAv19ptfXJHizdKW?utm_source=generator"
+    width="100%"
+    height="152"
+    frameborder="0"
+    allowfullscreen=""
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy">
+    </iframe>
+    </div>
+    </div>
 
     <section aria-labelledby="build-log">
       <h2 class="build-heading" id="build-log">Build Log</h2>
