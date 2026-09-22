@@ -13,7 +13,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Toluwalope Kolawole</title>
-  <meta name="description" content="Creative Operator, Strategist, Dealmaker.">
+  <meta name="description" content="Toluwalope Kolawole — Creative Operator, Strategist, Dealmaker.">
+  <meta name="author" content="Toluwalope Kolawole">
   <link rel="canonical" href="https://tolu.live/">
 
   <meta property="og:type" content="website">
@@ -36,10 +37,39 @@
   <script type="application/ld+json">
     {
       "@context":"https://schema.org",
-      "@type":"Person",
-      "name":"Toluwalope Kolawole",
-      "url":"https://tolu.live/",
-      "description":"Creative Operator, Strategist, Dealmaker."
+      "@graph":[
+        {
+          "@type":"WebSite",
+          "@id":"https://tolu.live/#website",
+          "url":"https://tolu.live/",
+          "name":"Toluwalope Kolawole",
+          "alternateName":"Tolú"
+        },
+        {
+          "@type":"ProfilePage",
+          "@id":"https://tolu.live/#profile",
+          "url":"https://tolu.live/",
+          "name":"Toluwalope Kolawole",
+          "isPartOf":{"@id":"https://tolu.live/#website"},
+          "mainEntity":{"@id":"https://tolu.live/#person"}
+        },
+        {
+          "@type":"Person",
+          "@id":"https://tolu.live/#person",
+          "name":"Toluwalope Kolawole",
+          "alternateName":["Tolú","dont4getmybread"],
+          "url":"https://tolu.live/",
+          "description":"Creative Operator, Strategist, Dealmaker.",
+          "image":"https://tolu.live/og-image.jpg?v=2",
+          "sameAs":[
+            "https://x.com/dont4getmybread",
+            "https://www.linkedin.com/in/dont4getmybread/",
+            "https://www.instagram.com/dont4getmybread/",
+            "https://www.youtube.com/@dont4getmybread",
+            "https://github.com/dont4getmybread"
+          ]
+        }
+      ]
     }
   </script>
 
